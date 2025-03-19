@@ -8,8 +8,9 @@ import lombok.Data;
 public class Reviews {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generate reviewId
-    private Long reviewId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reviewId") // Auto-generate reviewId
+    private String reviewId;
 
     @ManyToOne
     @JoinColumn(name = "productId", nullable = false)
