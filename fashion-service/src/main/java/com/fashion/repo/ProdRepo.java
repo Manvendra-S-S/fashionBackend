@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProdRepo extends JpaRepository<ProdDetails, String> {
 
-    @Query("SELECT p FROM ProdDetails p JOIN FETCH p.reviews WHERE p.productId = :productId")
+    @Query("SELECT p FROM ProdDetails p WHERE p.productId = :productId")
     ProdDetails findProductById(String productId);
 }
 
