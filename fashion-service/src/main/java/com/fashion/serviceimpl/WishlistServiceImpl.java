@@ -1,6 +1,9 @@
 package com.fashion.serviceimpl;
 
+import com.fashion.repo.SessionRepo;
+import com.fashion.request.SessionData;
 import com.fashion.response.WishlistData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,18 +12,22 @@ import java.util.List;
 @Service
 public class WishlistServiceImpl {
 
-    List<WishlistData> getUserWishlist(String useId, String prodId){
-        List<WishlistData> wishlist = new ArrayList<>();
-        WishlistData wishlistData = new WishlistData();
-        wishlistData.setUserId(useId);
-        wishlistData.setProductId(prodId);
-        wishlistData.setQuantity(1);
-        wishlistData.setPrice(100);
-        wishlistData.setProdName("Product 1");
-        wishlistData.setDetails("Product 1 details");
+    @Autowired
+    private SessionRepo sessionRepo;
 
-        wishlist.add(wishlistData);
-
-        return wishlist;
+    public String addWishlist(SessionData data){
+        List<SessionData> wishlist = new ArrayList<>();
+        sessionRepo.save(data);
+        return "Successfully Added to cart!!";
     }
+
+    public List<SessionData> getWishlist(String sessionId) {
+        return sessionRepo.getWishListData(sessionId);
+    }
+
+    public String removeArticle(String prodUrl){
+         sessionRepo.deleteByProductUrl(prodUrl);
+        return "Deleted Successfully !!";
+    }
+
 }
