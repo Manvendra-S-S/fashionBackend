@@ -95,5 +95,6 @@
 	<modules>
 		<module>user</module>
 		<module>fashion-service</module>
+		<module>payment-service</module>
 	</modules>
 </project>
